@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test")*/
 public class testController {
 	//field
+	private String field1;
+	private String field2;
 	//constructor
 	//method
 	
