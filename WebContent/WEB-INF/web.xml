@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+
+		
+	<!-- Root-WebappplicationContext 설정 -->
+	<listener>
+		<!-- web application이 WAS에 배치 될 때 
+		발생하는 이벤트를 처리하는 객체 등록 배치를 시작 할때 Root-WebappplicationContext 생성 -->
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 위치 알려주기 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/root/*.xml</param-value>
+	</context-param>
+
+	<!-- WebappplicationContext 설정 -->
+	<servlet>
+		<!-- class를 간단히 부를 이름:name -->
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/dispatcher/*.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- http://localhost:8080/webapp1/xxx -->	
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>   <!-- servlet의 name과 동일하게 넣는다. -->
+		<url-pattern>/</url-pattern> <!--  dispatcher가 받음 -->
+	</servlet-mapping>
+
+
+</web-app>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="com.mycompany.webapp"
+		use-default-filters="false"> <!-- defalt값을 없앰 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+
+
+
+
+	<!-- common 패키지  
+	spring에는 web application contextfile이 들어감
+	이놈들이 관리하는 패키지 지정은 component-scan
+	common은 이미 WebApplication에서 관리하는데, 만약 common 밑의 다른 폴더가 들어오면 root가 관리하는 것과 
+	다른 폴더가 관리하는 것이 겹치기 떄문에 패키지마다 웹 어플을 분리하는 것이 중요함
+	-->
+	
+
+	<!-- controller annotation(@Controller)가 붙어있는 것만 객체로 만드는데 component-scan은 base-package의 클래스를 객체로 찾겠다는 의미 -->	
+	<!-- 그 객체는 dispatcherServlet이 만든 WebApplicationContext가 관리 -->
+	<!-- root에서 만든 객체는 모두 사용 가능 -->
+</beans>
