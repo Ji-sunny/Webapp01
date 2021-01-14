@@ -30,39 +30,7 @@
 			<div class="mainCenter">
 				<jsp:include page="/WEB-INF/views/include/menu.jsp"></jsp:include>
 					<div class="content">
-						<div class="sector">
-							<h5>헤더값 읽기(Spring이 제공)</h5>
-							<div>
-								<a class="btn btn-info btn-sm" href="method1">브라우저 정보 얻기</a>
-							</div>
-						</div>
-						<div class="sector">
-							<h5>헤더값 읽기 (HttpServletRequest, WAS가 제공)</h5>
-							<div>
-								<a class="btn btn-info btn-sm" href="method2">브라우저 정보 얻기</a>
-							</div>
-						</div>
-						
-						<div class="sector">
-							<h5>HttpServletResponse를 이용</h5>
-							<div>
-								<a class="btn btn-info btn-sm" href="method3">쿠키 생성 꼬소</a>
-							</div>
-						</div>
-						
-						<div class="sector">
-							<h5>Cookie값 읽기(HttpServletRequest를 이용)</h5>
-							<div>
-								<a class="btn btn-info btn-sm" href="method4">쿠키 value 냠냠</a>
-							</div>
-						</div>
-						
-						<div class="sector">
-							<h5>Cookie값 읽기 (Spring 이용)</h5>
-							<div>
-								<a class="btn btn-info btn-sm" href="method5">쿠키 value 냠냠</a>
-							</div>
-						</div>
+						<%System.out.println("forward.jsp 실행"); %>
 					</div>
 			</div>
 		</div>
