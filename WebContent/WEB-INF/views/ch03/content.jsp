@@ -34,7 +34,7 @@
 							<h5>GET 방식 데이터 전달</h5>
 							<div>
 								<!-- enter나 space를 두지 않음 -->
-								<a class="btn btn-info btn-sm" href="method1?param1=문자열&param2=5&param3=3.14&param4=true&param5=2021-01-14">데이터 전달</a>
+								<a class="btn btn-info btn-sm" href="method4?param1=Daily&param2=5&param5=2021-01-14">데이터 전달</a>
 							</div>
 						</div>
 						
@@ -42,7 +42,7 @@
 							<h5>POST 방식 데이터 전달</h5>
 							<div>
 								<form method="POST" action="method1">
-									<input type="text" name="param1" value="문자열"> <br/>
+									<input type="text" name="param1" value="Daily"> <br/>
 									<input type="number" name="param2" value="5"> <br/>
 									<input type="number" name="param3" value="3.14"> <br/>
 									<input type="checkbox" name="param4" checked="checked"> <br/><!--  0은 false, 1은 true -->
@@ -55,7 +55,7 @@
 							<h5>요청 파라미터명과 매개변수명이 다를 때 방식 데이터 전달</h5>
 							<div>
 								<form method="POST" action="method2">
-									<input type="text" name="param1" value="문자열"> <br/>
+									<input type="text" name="param1" value="데일리"> <br/>
 									<input type="number" name="param2" value="5"> <br/>
 									<input type="number" name="param3" value="3.14"> <br/>
 									<input type="checkbox" name="param4" checked="checked"> <br/><!--  0은 false, 1은 true -->
