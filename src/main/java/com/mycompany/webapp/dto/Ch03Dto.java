@@ -1,5 +1,6 @@
 package com.mycompany.webapp.dto;
 
+//data 전달 객체
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
