@@ -7,7 +7,7 @@
 		<form method="post" action="join">
 			아이디:<input type="text"/><br/>
 			이름:<input type="text"/><br/>
-			페스워드:<input type="password"/><br/>
+			패스워드:<input type="password"/><br/>
 			<button class="btn btn-primary btn-sm">회원가입</button>
 		</form>
 	</div>

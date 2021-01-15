@@ -64,7 +64,7 @@ public class Ch09Controller {
 		File file = new File(filePath); //file의 경로를 갖고 있는 객체
 		logger.info("file" + file);
 			try {
-				uphoto.transferTo(file);
+				uphoto.transferTo(file); //파일 저장 
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
