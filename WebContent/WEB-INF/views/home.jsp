@@ -29,19 +29,5 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript">
-	
-		const fun1 = () => {
-			const btn = document.querySelector("#user");
-			const $btn = $(btn);
-			$btn.hide();
-		};
-		
-		$(() => {
-			$("#login").click(() => {
-				$("#user").show();
-			});
-		});
-	
-	</script>
+
 </html>
