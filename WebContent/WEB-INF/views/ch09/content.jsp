@@ -33,13 +33,31 @@
 					<div class="sector">
 						<h5>파일 업로드</h5>
 						<div>
-							<form method="post" enctype="multipart/form-data" action="fileupload">
-								<input type="text" name="title" placeholder="그림 제목"/><br/>
-								<input type="text" name="desc" placeholder="그림 설명" style="width: 300px;" /><br/>
-								<input type="file" name="attach" placeholder="파일 선택"/><br/>
+							<form method="post" enctype="multipart/form-data" action="photoupload">
+								<input type="text" name="uid" placeholder="아이디"/><br/>
+								<input type="text" name="uname" placeholder="성명"/><br/>
+								<input type="text" name="upassword" placeholder="패스워드"/><br/>
+								<input type="file" name="uphoto"/><br/>
 								<!-- <input type="file" name="attach" placeholder="파일 선택" multiple="multiple"/><br/> 사진을 배열로 받음-->
-								<input class="btn btn-primary btn-sm" type="submit" value="사진 올리기"/>
+								<input class="btn btn-primary btn-sm" type="submit" value="회원가입"/>
 							</form>
+						</div>
+					</div>
+					
+					<div class="sector">
+						<h5>파일 리스트</h5>
+						<div>
+							<script type="text/javascript">
+								$(function() {
+									$.ajax({
+										url: "photolist",
+										success: function(data) {
+											$("#photolist").html(data);
+										}
+									})
+								});
+							</script>
+							<div id="photolist"></div>
 						</div>
 					</div>
 				</div>
