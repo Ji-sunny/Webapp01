@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,16 +99,29 @@ public class Ch09Controller {
 		//응답으로 보내는 내용의 type과 문자 set
 		String saveDirPath = "D:/MyWorkPlace/uploadfiles/";
 		String filePath = saveDirPath + photo;
+		
+		//응답 본문 데이터의 종류를 응답 헤더에 추가 
 		response.setContentType("image/jpeg");
+		
+		//응답 본문 데이터를 파일로 다운로드 (한글을 변환해주어야함)
+		//http 규약에 따라 헤더에는 한글을 넣지 못함
+		try {
+			photo = new String(photo.getBytes("UTF-8"), "ISO-8859-1");
+		} catch (Exception e1) {
+
+			e1.printStackTrace();
+		} 
+		response.setHeader("Content-Disposition", "attachment; filename=\""+ photo +"\"");
 		try {
 			OutputStream os = response.getOutputStream();
 			InputStream is = new FileInputStream(filePath);
-			byte[] data = new byte[1024];
-			while (true) {
-				int readByteNum = is.read(data);
-				if (readByteNum == -1) {break;}
-				os.write(data, 0 , readByteNum);
-			}
+			/*
+			 * byte[] data = new byte[1024]; 
+			 * while (true) { int readByteNum = is.read(data);
+			 * if (readByteNum == -1) {break;} 
+			 * os.write(data, 0 , readByteNum); }
+			 */
+			FileCopyUtils.copy(is,os);
 			os.flush();
 			os.close();
 			is.close();
