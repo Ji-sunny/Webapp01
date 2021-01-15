@@ -30,7 +30,7 @@
 				<jsp:include page="/WEB-INF/views/include/menu.jsp"></jsp:include>
 					<div class="content">
 						<div class="sector">
-							<h5>GET 방식 데이터 전달</h5>
+							<h5>GET 방식 데이터 전달 and DTO</h5>
 							<div>
 								<!-- enter나 space를 두지 않음 -->
 								<a class="btn btn-info btn-sm" href="method4?param1=Daily&param2=5&param5=2021-01-14">데이터 전달</a>
