@@ -35,7 +35,7 @@
 						<div class="sector">
 							<h5>EL(Expressions Language)를 이용해서 스칼라 값(숫자, 문자열, 논리값) 읽기</h5>
 							<div>
-							<%-- ${ }가 EL이며, getmethod랑 비슷함 --%>
+							<%-- ${ }가 EL이며, getmethod()랑 비슷함 --%>
 								<div>이름: ${name} </div>
 								<div>나이: ${age}</div>
 								<div>직업: ${job}</div>
