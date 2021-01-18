@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- XML를 이용한 setter주입 -->
+	<!-- id가 같으면 더 안만들고 사용함 -->
+	<!-- property는 set method이며, setservice4를 호출해서 ref의 값을 매개변수값안에 대입해준다. -->
+	<!-- annotation작업을 하지 못할때 사용한다. -->
+ 	<bean id="ch13Controller"
+			class="com.mycompany.webapp.controller.Ch13Controller">
+			<property name="service3" ref="ch13Service3"></property>
+			<property name="service4" ref="ch13Service4"></property>
+	</bean> 
+	
+<!-- 	<bean id="ch13Controller"
+			class="com.mycompany.webapp.controller.Ch13Controller"
+			p:propertyName-ref="ch13Service3"
+			p:propertyName-ref="ch13Service4">
+
+	</bean> -->
+	
+</beans>
