@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- dispacter servlet이 만든 container에 아래와 같은 객체가 생성됨 -->
 	<bean id="ch13Service1" class="com.mycompany.webapp.service.Ch13Service1"/>
 	
+	<!-- properties파일 설정 경로 placeholder property의 파일 위치-->
+	 <context:property-placeholder
+		location="classpath:properties/*.properties"/>
 </beans>

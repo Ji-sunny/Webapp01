@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p" 
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- XML를 이용한 setter주입 -->
 	<!-- id가 같으면 더 안만들고 사용함 -->
@@ -12,7 +14,11 @@
 			class="com.mycompany.webapp.controller.Ch13Controller">
 			<property name="service3" ref="ch13Service3"></property>
 			<property name="service4" ref="ch13Service4"></property>
-	</bean> 
+	</bean>
+	
+	<context:property-placeholder
+		location="classpath:properties/*.properties"/>
+	 
 	
 <!-- 	<bean id="ch13Controller"
 			class="com.mycompany.webapp.controller.Ch13Controller"

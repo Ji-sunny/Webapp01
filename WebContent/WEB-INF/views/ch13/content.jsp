@@ -52,6 +52,20 @@
 							<a class="btn btn-primary btn-sm"  href="service5">Ch13Service5 사용</a>
 						</div>
 					</div>
+					
+					<div class="sector">
+						<h5>Interface 타입 주입</h5>
+						<div>
+							<a class="btn btn-primary btn-sm"  href="service6">Ch13Service6 사용</a>
+						</div>
+					</div>
+					
+					<div class="sector">
+						<h5>Properties 값 주입</h5>
+						<div>
+							<a class="btn btn-primary btn-sm"  href="fileupload">변경될 값 지정</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

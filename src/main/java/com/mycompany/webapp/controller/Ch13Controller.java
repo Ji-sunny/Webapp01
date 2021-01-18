@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import com.mycompany.webapp.service.Ch13Service2;
 import com.mycompany.webapp.service.Ch13Service3;
 import com.mycompany.webapp.service.Ch13Service4;
 import com.mycompany.webapp.service.Ch13Service5;
+import com.mycompany.webapp.service.Ch13Service6;
+import com.mycompany.webapp.service.Ch13Service7;
 
 @Controller
 @RequestMapping("/ch13")
@@ -33,6 +36,8 @@ public class Ch13Controller {
 	private Ch13Service4 service4;
 	
 	@Resource private Ch13Service5 service5;
+	@Resource private Ch13Service6 service6;
+	@Resource private Ch13Service7 service7;
 	//constructor-----방법2----------
 	/* 객체를 만들때 매개값이 IoC가 관리하는 객체가 있는 지 확인 하고 가져와서 사용함 */
 	
@@ -99,4 +104,23 @@ public class Ch13Controller {
 		service5.method();
 		return "redirect:/ch13/content";
 	}
+	
+	@GetMapping("/service6")
+	public String service6() {
+		service6.method();
+		return "redirect:/ch13/content";
+	}
+	
+	
+	@Value("${fileupload}") private String saveDirPath;
+	 
+	
+	@GetMapping("fileupload")
+	public String upload() {
+		logger.info("실행");
+		logger.info("fileupload: " + saveDirPath);
+		service7.method();
+		return "redirect:/ch13/content";
+	}
+	
 }
