@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class Ch13Controller {
 	@Resource
 	private Ch13Service1 service1;
 	
-	@Resource
+	//@Resource
 	private Ch13Service2 service2;
 	
 	
@@ -51,10 +52,13 @@ public class Ch13Controller {
 	/*
 	 * @Autowired public void setService1(Ch13Service1 service1) { this.service1 =
 	 * service1; logger.info("setService1()"); }
-	 * 
-	 * @Autowired public void setService2(Ch13Service2 service2) { this.service2 =
-	 * service2; logger.info("setService2()"); }
 	 */
+	 @Autowired 
+	 public void setService2(Ch13Service2 service2) { 
+		 this.service2 =service2; 
+		 logger.info("setService2()"); 
+		 }
+	 
 	
 
 	public void setService3(Ch13Service3 service3) { 
