@@ -36,6 +36,14 @@
 							<a class="btn btn-primary btn-sm"  href="conntest">연결 테스트</a>
 						</div>
 					</div>
+					
+					<div class="sector">
+						<h5>PK로 검색하기</h5>
+						<div>
+							<a class="btn btn-primary btn-sm"  href="employee?employee_id=100">사번이 100번인 사원의 정보</a>
+							<a class="btn btn-primary btn-sm"  href="employee?employee_id=101">사번이 101번인 사원의 정보</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
