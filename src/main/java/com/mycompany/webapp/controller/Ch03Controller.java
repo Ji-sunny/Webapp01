@@ -2,11 +2,16 @@ package com.mycompany.webapp.controller;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,7 +42,7 @@ import com.mycompany.webapp.dto.Ch03Dto;
 		@RequestMapping("/method2")
 		public String method2(
 				@RequestParam("param1")String arg1, 
-				@RequestParam("param2")int arg2, double param3, boolean param4, @DateTimeFormat(pattern = "yyyy-MM-dd")Date param5) {
+				@RequestParam("param2")int arg2, double param3, String param4, @DateTimeFormat(pattern = "yyyy-MM-dd")Date param5) {
 				logger.info("param1: " +arg1);
 				logger.info("param2: " +arg2);
 				logger.info("param3: " +param3);
@@ -66,4 +71,23 @@ import com.mycompany.webapp.dto.Ch03Dto;
 			logger.info("param3: " +dto.getParam5());
 			return "ch03/content";
 		}
+		
+		/*
+		 * @PostMapping(value = "method5") public String method5(String colorOption,
+		 * String productOption) { logger.info(colorOption); logger.info(productOption);
+		 * 
+		 * return "ch03/content"; }
+		 */
+		
+		@PostMapping(value = "method5")
+		public String method5(HttpServletRequest req, HttpSession session) {
+			String pColor = req.getParameter("colorOption");
+			String pOption = req.getParameter("productOption");
+			logger.info(pColor); 
+			logger.info(pOption);
+			session.setAttribute("pColor", pColor);
+			session.setAttribute("pOption", pOption);
+			return "ch03/content";
+		}
+		
 	}

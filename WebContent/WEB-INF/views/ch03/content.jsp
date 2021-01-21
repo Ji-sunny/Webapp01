@@ -1,6 +1,6 @@
 <%--page 지시자 --%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%--import 속성 --%>
  <%@ page import = "java.util.*" %>
  <%@ page import = "java.text.*" %>
@@ -57,7 +57,7 @@
 									<input type="text" name="param1" value="데일리"> <br/>
 									<input type="number" name="param2" value="5"> <br/>
 									<input type="number" name="param3" value="3.14"> <br/>
-									<input type="checkbox" name="param4" checked="checked"> <br/><!--  0은 false, 1은 true -->
+									<input type="checkbox" name="param4" value="hello" checked="checked"> <br/><!--  0은 false, 1은 true -->
 									<input type="date" name="param5" value="2021-12-25"> <br/>
 									<button class="btn btn-info btn-sm">데이터 전달</button>
 								</form>
@@ -72,6 +72,30 @@
 									<button class="btn btn-info btn-sm">데이터 전달</button>
 								</form>
 							</div>
+						</div>
+						
+						<div class="sector">
+							<h5>Defalt 값</h5>
+							<div>
+								<form method="POST" action="method5">
+									<select name="colorOption" id="colorOption" style="width: 80%;" >
+										<option value="none">[필수]색상을 선택해주세요</option>
+										<option value="brown">브라운</option>
+										<option value="beige">베이지</option>
+										<option value="grey">그레이</option>
+									</select>
+									<br/>
+									<select name="pOption" id="productOption" style="width: 80%;">
+										<option value="none">[선택] 제품사양</option>
+										<option value="basic">쿠시노 침대가드 1000폭</option>
+										<option value="addFoot">쿠시노 침대풋보드 1000폭</option>
+									</select>
+									<button class="btn btn-info btn-sm">데이터 전달</button>
+								</form>
+							</div>
+							<c:if test="${!empty pColor}">
+								<div>성공</div>
+							</c:if>
 						</div>
 					</div>
 			</div>

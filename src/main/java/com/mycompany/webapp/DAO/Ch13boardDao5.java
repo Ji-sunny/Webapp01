@@ -13,7 +13,6 @@ public class Ch13boardDao5 implements Ch13BoardDao{
 	@Override
 	public void insert() {
 		logger.info("실행");
-		
 	}
 
 }

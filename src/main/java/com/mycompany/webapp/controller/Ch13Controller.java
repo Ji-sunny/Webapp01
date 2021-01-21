@@ -112,7 +112,7 @@ public class Ch13Controller {
 	@GetMapping("/service6")
 	public String service6() {
 		service6.method();
-		return "redirect:/ch13/content";
+		return "ch13/content";
 	}
 	
 	
