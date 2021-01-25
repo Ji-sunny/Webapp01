@@ -14,7 +14,7 @@ public class Ch13Service7 {
 	//field
 	@Value("${fileupload}") private String saveDirPath;
 	
-	//constructor
+	//method
 	public void method() {
 		logger.info("실행");
 		logger.info("fileupload: " + saveDirPath);

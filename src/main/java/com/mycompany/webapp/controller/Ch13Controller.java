@@ -58,8 +58,8 @@ public class Ch13Controller {
 		 this.service2 =service2; 
 		 logger.info("setService2()"); 
 		 }
-	 
-	
+
+
 
 	public void setService3(Ch13Service3 service3) { 
 	this.service3 = service3; logger.info("setService3()"); 

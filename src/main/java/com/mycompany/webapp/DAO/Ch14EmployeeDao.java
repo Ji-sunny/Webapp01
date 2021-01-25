@@ -13,7 +13,7 @@ import com.mycompany.webapp.dto.Ch14Employee;
 public class Ch14EmployeeDao {
 	private static final Logger logger = LoggerFactory.getLogger(Ch14EmployeeDao.class);
 	
-	//Field
+	//Field datasource에서 가져오는거지
 	@Resource
 	private SqlSessionTemplate sst;
 	
