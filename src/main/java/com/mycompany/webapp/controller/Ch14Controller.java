@@ -3,6 +3,7 @@ package com.mycompany.webapp.controller;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.webapp.dto.Ch14Employee;
+import com.mycompany.webapp.dto.Ch14board;
+import com.mycompany.webapp.service.Ch14BoardService;
 import com.mycompany.webapp.service.Ch14EmployeeService;
 
 @Controller
@@ -141,10 +144,26 @@ public class Ch14Controller {
 		pw.flush();
 		pw.close();
 	}
+	@Resource
+	private Ch14BoardService boardservice;
 	
 	@GetMapping(value = "/boardlist")
-	public String boardlist() {
+	public String boardlist(Model model) {
+		List<Ch14board> list = boardservice.getBoardList();
+		model.addAttribute("list", list);
 		return "ch14/boardlist";
+	}
+	
+	@GetMapping(value = "/boardsave")
+	public String boardsave() {
+//		for(int i=1; i<=100; i++) {
+//			Ch14board board = new Ch14board();
+//			board.setBtitle("제목" + i);
+//			board.setBcontent("내용" + i);
+//			board.setBwriter("winter");
+//			boardservice.saveBoard(board);
+//		}
+		return "redirect:/ch14/boardlist";
 	}
 	
 }

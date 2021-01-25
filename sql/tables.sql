@@ -11,9 +11,9 @@ create table boards(
     bwriter                 varchar(20)     REFERENCES members (mid) on delete CASCADE,
     bdate                   DATE            not null,
     bhitcount               NUMBER(5)       not null,
-    battachsavefilename     varchar(100)    null, --고객이 올린 파일을 저장
-    battachorignalfilename  varchar(100)    null, --고객이 올린 파일의 이름
-    battachcontenttype      varchar(100)    null
+    battachsname    		varchar(100)    null, --고객이 올린 파일을 저장
+    battachoename  			varchar(100)    null, --고객이 올린 파일의 이름
+    battachtype    			varchar(100)    null
 );
 
 create sequence bno_seq;
