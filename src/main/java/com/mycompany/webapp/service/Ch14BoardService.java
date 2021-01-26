@@ -49,8 +49,13 @@ private static final Logger logger = LoggerFactory.getLogger(Ch14BoardService.cl
 		
 	}
 
-	public void deleteBoard(int bno) {
-		boardDao.delete(bno);
+	public int deleteBoard(int bno) {
+		int rows = boardDao.delete(bno);
+		return rows;
+	}
+
+	public void addHitcount(int bno) {
+		boardDao.updateHitcount(bno);
 		
 	}
 }

@@ -53,8 +53,13 @@ public class Ch14BoardDao {
 		return rows;
 	}
 
-	public void delete(int bno) {
-		sst.delete("boards.delete", bno);
+	public int delete(int bno) {
+		int rows = sst.delete("boards.delete", bno);
+		return rows;
+	}
+
+	public void updateHitcount(int bno) {
+		sst.update("boards.updatehitcount", bno);
 		
 	}
 }

@@ -59,6 +59,16 @@
 						    <label for="bcontent">내용</label><br/>
 						    <textarea class="form-control" readonly id="bcontent" name="bcontent" rows="10">${board.bcontent}</textarea>
 						  </div>
+						  
+						  <div class="form-group">
+						    <label for="bcontent">첨부 사진</label><br/>
+						    <c:if test="${board.battachsname ne null}">
+						  		<a class="btn btn-info ml-2" href="battach?bno=${board.bno}">다운로드</a>
+						    	<img class="rounded" src="battach?bno=${board.bno}" width="200px"> <br/>
+						    </c:if>
+						  </div>
+						  
+						  
 						  <a href="boardlist2" class="btn btn-primary">목록</a>
 						  <c:if test="${sessionMid ==board.bwriter}">
 							  <a href="boardupdate?bno=${board.bno}" class="btn btn-warning">수정</a>

@@ -35,7 +35,7 @@
 						<div class="alert alert-primary" role="alert">
 							글쓰기
 						</div>
-						<form name="boardwriteform" action="boardwrite" method="post">
+						<form enctype="multipart/form-data" name="boardwriteform" action="boardwrite" method="post">
 							<div class="form-group">
 							    <label for="bwriter">글쓴이</label>
 							    <input type="text" class="form-control" id="bwriter" name="bwriter" readonly value="${sessionMid}">
@@ -48,6 +48,10 @@
 						  <div class="form-group">
 						    <label for="bcontent">내용</label><br/>
 						    <textarea class="form-control" id="bcontent" name="bcontent" rows="10"></textarea>
+						  </div>
+						  <div class="form-group">
+						    <label for="battach">첨부</label><br/>
+						    <input type="file" id="battach" name="battach"/>
 						  </div>
 						  <button class="btn btn-primary">저장</button>
 						  <a href="boardlist2" class="btn btn-primary">뒤로가기</a>

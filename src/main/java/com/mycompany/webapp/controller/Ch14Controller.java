@@ -199,10 +199,23 @@ public class Ch14Controller {
 	
 
 	@PostMapping(value = "/boardwrite")
-	public String boardwrite(Ch14board board, HttpSession session) {
+	public String boardwrite(Ch14board board, HttpSession session) throws Exception{
+		System.out.println(board.toString());
 		String mid = (String) session.getAttribute("sessionMid");
 		board.setBwriter(mid);
+		MultipartFile mf = board.getBattach();
+		if(!mf.isEmpty()) {
+			board.setBattachoname((mf.getOriginalFilename()));
+			String saveName = new Date().getTime() + "-" +mf.getOriginalFilename();
+			board.setBattachsname(saveName);
+			board.setBattachtype(mf.getContentType());
+			//파일 저장
+			File saveFile = new File("D:/MyWorkPlace/uploadfiles/boards/" + saveName);
+			mf.transferTo(saveFile);
+		}
+		
 		boardservice.saveBoard(board);
+		
 		return "redirect:/ch14/boardlist2";
 	}
 	
@@ -298,6 +311,7 @@ public class Ch14Controller {
 	
 	@GetMapping(value = "/boardread")
 	public String boardread(int bno, Model model) {
+		boardservice.addHitcount(bno);
 		Ch14board board = boardservice.getBoard(bno);
 		model.addAttribute("board", board);
 		return "ch14/boardread";
@@ -319,8 +333,34 @@ public class Ch14Controller {
 	
 	@GetMapping(value = "/boarddelete")
 	public String boarddeleteForm(int bno) {
-		boardservice.deleteBoard(bno);
+		int num = boardservice.deleteBoard(bno);
+		System.out.println(num);
 		return "redirect:/ch14/boardlist2";
+	}
+	
+	@GetMapping(value = "/battach")
+	public void battach(int bno, HttpSession sesson, HttpServletResponse response) throws Exception {
+	
+		Ch14board board = boardservice.getBoard(bno);
+		String filePath = null;
+		
+
+		String battachsname = board.getBattachsname();
+		filePath = "D:/MyWorkPlace/uploadfiles/boards/" + battachsname;
+		
+		response.setContentType(board.getBattachtype());
+		
+		String oname = board.getBattachoname();
+		oname = new String(oname.getBytes("UTF-8"), "ISO-8859-1");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+ oname +"\"");
+
+		OutputStream os = response.getOutputStream();
+		InputStream is = new FileInputStream(filePath);
+		FileCopyUtils.copy(is,os);
+		os.flush();
+		os.close();
+		is.close();
+		
 	}
 	
 }

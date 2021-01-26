@@ -25,19 +25,31 @@
 	</select>
 	
 	<select id="selectByPK" parameterType="int" resultType="board">
-		select bno, btitle, bcontent, bwriter, bhitcount, bdate 
+		select bno, btitle, bcontent, bwriter, bhitcount, bdate, battachsname, battachoname, battachtype
 		from boards
 		where bno = #{bno}
 	</select>
 	<!-- #{} getbtitle를 가지고 오겠다는 의미 -->
 	<insert id="insert" parameterType="board">
-		insert into boards (bno, btitle, bcontent, bwriter, bdate, bhitcount)
-		values (bno_seq.nextval, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0)
+		<if test="battachsname == null">
+			insert into boards (bno, btitle, bcontent, bwriter, bdate, bhitcount)
+			values (bno_seq.nextval, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0)
+		</if>
+		<if test="battachsname != null">
+			insert into boards (bno, btitle, bcontent, bwriter, bdate, bhitcount, battachsname, battachoname, battachtype)
+			values (bno_seq.nextval, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0, #{battachsname}, #{battachoname}, #{battachtype})
+		</if>
 	</insert>
 	
 	<update id="update" parameterType="board">
 		update boards 
 		set btitle=#{btitle}, bcontent=#{bcontent}
+		where bno=#{bno} 
+	</update>
+	
+	<update id="updatehitcount" parameterType="int">
+		update boards 
+		set bhitcount=bhitcount+1
 		where bno=#{bno} 
 	</update>
 	
