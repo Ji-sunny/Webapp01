@@ -56,6 +56,32 @@
 							  	</c:forEach>
 							  </tbody>
 							</table>
+							<div class="d-flex align-items-center justify-content-between">
+								<c:if test="${sessionMid != null}">
+									<a href="boardwrite" class="btn btn-outline-success btn-sm mr-1">글쓰기 </a>
+								</c:if>
+								<c:if test="${sessionMid == null}">
+									<div></div>
+								</c:if>
+								<div>
+									<a href="boardlist2?pageNo=1" class="btn btn-outline-info btn-sm mr-1">처음 </a>
+									<c:if test="${pager.groupNo>1}">
+										<a href="boardlist2?pageNo=${pager.startPageNo-1}" class="btn btn-outline-info btn-sm mr-1">이전 </a>
+									</c:if>
+									<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+										<c:if test="${i==pager.pageNo}">
+											<a href="boardlist2?pageNo=${i}" class="btn btn-warning btn-sm mr-1">${i}</a>
+										</c:if>
+										<c:if test="${i!=pager.pageNo}">
+											<a href="boardlist2?pageNo=${i}" class="btn btn-outline-warning btn-sm mr-1">${i}</a>
+										</c:if>
+									</c:forEach>
+									<c:if test="${pager.groupNo < pager.totalGroupNo}">
+										<a href="boardlist2?pageNo=${pager.endPageNo+1}" class="btn btn-outline-info btn-sm mr-1">다음 </a>
+									</c:if>
+									<a href="boardlist2?pageNo=${pager.totalPageNo}" class="btn btn-outline-info btn-sm mr-1">맨끝 </a>
+								</div>
+							</div>
 						</div>
 					</div>	
 					

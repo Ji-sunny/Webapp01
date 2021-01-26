@@ -16,14 +16,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.Ch14Employee;
+import com.mycompany.webapp.dto.Ch14Member;
 import com.mycompany.webapp.dto.Ch14Pager;
 import com.mycompany.webapp.dto.Ch14board;
 import com.mycompany.webapp.service.Ch14BoardService;
 import com.mycompany.webapp.service.Ch14EmployeeService;
+import com.mycompany.webapp.service.Ch14MemberService;
 
 @Controller
 @RequestMapping("/ch14")
@@ -172,10 +175,59 @@ public class Ch14Controller {
 	@GetMapping(value = "/boardlist2")
 	public String boardlist2(@RequestParam(defaultValue="1")int pageNo, Model model) {
 		int totalRows = boardservice.getTotalRows();
-		Ch14Pager pager = new Ch14Pager(10, 5, totalRows, pageNo);
+		Ch14Pager pager = new Ch14Pager(6, 5, totalRows, pageNo);
 		List<Ch14board> list = boardservice.getBoardList(pager);
 		model.addAttribute("list", list);
+		model.addAttribute("pager",pager);
 		return "ch14/boardlist";
+	}
+	
+	@GetMapping(value = "/boardwrite")
+	public String boardWriteFrom() {
+		return "ch14/boardwrite";
+	}
+	
+
+	@PostMapping(value = "/boardwrite")
+	public String boardwrite(Ch14board board) {
+		boardservice.saveBoard(board);
+		return "redirect:/ch14/boardlist2";
+	}
+	
+	@GetMapping(value = "/join")
+	public String joinForm() {
+		return "ch14/join";
+	}
+	
+	@Resource
+	private Ch14MemberService memberService;
+	
+	@PostMapping(value = "/join")
+	public String join(Ch14Member member) {
+		memberService.join(member);
+		return "redirect:/ch14/boardlist2";
+	}
+	
+	@GetMapping(value = "/login")
+	public String loginForm() {
+		return "ch14/login";
+	}
+	
+	//success, wrongMid, wrongPassword
+	@PostMapping(value = "/login")
+	public void login(Ch14Member member, HttpServletResponse reponse) throws Exception {
+		String result = memberService.login(member);
+		reponse.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = reponse.getWriter();
+		
+		//result: ???
+		
+		JSONObject root = new JSONObject();
+		root.put("result", result);
+		pw.println(root.toString());
+		
+		pw.flush();
+		pw.close();
 	}
 	
 }

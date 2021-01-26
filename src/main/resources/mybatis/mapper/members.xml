@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="members">
+	<select id="selectByPK" parameterType="string" resultType="member" >
+		select mid, mname, mpassword
+		from members
+		where mid=#{mid}
+	</select>
+	
+	<insert id="insert" parameterType="member">
+		insert into members
+		(mid, mname, mpassword)
+		values
+		(#{mid}, #{mname}, #{mpassword})
+	</insert>
+</mapper>
