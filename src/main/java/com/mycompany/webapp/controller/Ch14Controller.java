@@ -17,8 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.Ch14Employee;
+import com.mycompany.webapp.dto.Ch14Pager;
 import com.mycompany.webapp.dto.Ch14board;
 import com.mycompany.webapp.service.Ch14BoardService;
 import com.mycompany.webapp.service.Ch14EmployeeService;
@@ -144,6 +146,7 @@ public class Ch14Controller {
 		pw.flush();
 		pw.close();
 	}
+	
 	@Resource
 	private Ch14BoardService boardservice;
 	
@@ -164,6 +167,15 @@ public class Ch14Controller {
 //			boardservice.saveBoard(board);
 //		}
 		return "redirect:/ch14/boardlist";
+	}
+	
+	@GetMapping(value = "/boardlist2")
+	public String boardlist2(@RequestParam(defaultValue="1")int pageNo, Model model) {
+		int totalRows = boardservice.getTotalRows();
+		Ch14Pager pager = new Ch14Pager(10, 5, totalRows, pageNo);
+		List<Ch14board> list = boardservice.getBoardList(pager);
+		model.addAttribute("list", list);
+		return "ch14/boardlist";
 	}
 	
 }

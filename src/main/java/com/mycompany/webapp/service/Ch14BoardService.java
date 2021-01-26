@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.DAO.Ch14BoardDao;
+import com.mycompany.webapp.dto.Ch14Pager;
 import com.mycompany.webapp.dto.Ch14board;
 
 @Service
@@ -23,7 +24,17 @@ private static final Logger logger = LoggerFactory.getLogger(Ch14BoardService.cl
 		return list;
 	}
 	
+	public List<Ch14board> getBoardList(Ch14Pager pager){
+		List<Ch14board> list = boardDao.selectByPage(pager);
+		return list;
+	}
+	
 	public void saveBoard(Ch14board board) {
 		boardDao.insert(board);
+	}
+	
+	public int getTotalRows() {
+		int totalRows = boardDao.countAll();
+		return totalRows;
 	}
 }

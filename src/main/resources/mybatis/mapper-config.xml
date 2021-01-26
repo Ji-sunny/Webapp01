@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="employee" type="com.mycompany.webapp.dto.Ch14Employee"/>
 		<typeAlias alias="board" type="com.mycompany.webapp.dto.Ch14board"/>
+		<typeAlias alias="pager" type="com.mycompany.webapp.dto.Ch14Pager"/>
 	</typeAliases>
 </configuration>
 
