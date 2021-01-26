@@ -38,7 +38,7 @@
 						<form name="boardwriteform" action="boardwrite" method="post">
 							<div class="form-group">
 							    <label for="bwriter">글쓴이</label>
-							    <input type="text" class="form-control" id="bwriter" name="bwriter" readonly value="winter">
+							    <input type="text" class="form-control" id="bwriter" name="bwriter" readonly value="${sessionMid}">
 						  	</div>
 						  <div class="form-group">
 						    <label for="btitle">제목</label>

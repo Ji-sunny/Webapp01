@@ -4,12 +4,12 @@
 <div class="mainHeader">
 	<h3><a href="<%=application.getContextPath()%>/">Spring Framework</a></h3>
 	<div class="loginBox">
-		<c:if test="${loginStatus == null}">
+		<c:if test="${sessionMid == null}">
 			<a class="btn btn-info btn-sm mr-1" href="<%=application.getContextPath()%>/ch14/join">회원가입</a>
 			<a class="btn btn-info btn-sm mr-1" href="<%=application.getContextPath()%>/ch14/login">로그인</a>
 		</c:if>
 		
-		<c:if test="${loginStatus != null}">
+		<c:if test="${sessionMid != null}">
 			<img class="rounded-circle" src="<%=application.getContextPath()%>/resources/img/myphoto.jpg" width="50px"/>
 			<a class="btn btn-danger btn-sm" href="<%=application.getContextPath()%>/ch14/logout">로그아웃</a>
 		</c:if>

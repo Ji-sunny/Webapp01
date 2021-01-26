@@ -35,7 +35,7 @@
 						<div class="alert alert-primary" role="alert">
 							로그인
 						</div>
-						<form name="joinform" onsubmit="login()" style="width:200px;">
+						<form name="loginform" onsubmit="login()" style="width:200px;">
 							<div class="form-group">
 							    <label for="mid">아이디</label>
 							    <input type="text" class="form-control" id="mid" name="mid">

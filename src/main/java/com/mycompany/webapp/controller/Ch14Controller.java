@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.json.JSONArray;
@@ -189,7 +190,9 @@ public class Ch14Controller {
 	
 
 	@PostMapping(value = "/boardwrite")
-	public String boardwrite(Ch14board board) {
+	public String boardwrite(Ch14board board, HttpSession session) {
+		String mid = (String) session.getAttribute("sessionMid");
+		board.setBwriter(mid);
 		boardservice.saveBoard(board);
 		return "redirect:/ch14/boardlist2";
 	}
@@ -215,19 +218,27 @@ public class Ch14Controller {
 	
 	//success, wrongMid, wrongPassword
 	@PostMapping(value = "/login")
-	public void login(Ch14Member member, HttpServletResponse reponse) throws Exception {
+	public void login(Ch14Member member, HttpServletResponse reponse, HttpSession session) throws Exception {
 		String result = memberService.login(member);
+		if(result.equals("success")) session.setAttribute("sessionMid", member.getMid());
+		
 		reponse.setContentType("application/json; charset=UTF-8");
 		PrintWriter pw = reponse.getWriter();
 		
-		//result: ???
 		
+		//result: ???
 		JSONObject root = new JSONObject();
 		root.put("result", result);
 		pw.println(root.toString());
 		
 		pw.flush();
 		pw.close();
+	}
+	
+	@GetMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/ch14/boardlist2";
 	}
 	
 }
