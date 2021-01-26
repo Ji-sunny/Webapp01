@@ -1,8 +1,15 @@
 package com.mycompany.webapp.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.channels.SeekableByteChannel;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,10 +23,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.Ch14Employee;
 import com.mycompany.webapp.dto.Ch14Member;
@@ -206,9 +215,55 @@ public class Ch14Controller {
 	private Ch14MemberService memberService;
 	
 	@PostMapping(value = "/join")
-	public String join(Ch14Member member) {
+	public String join(Ch14Member member) throws Exception {
+		//파일 정보 얻기
+		MultipartFile mf = member.getMphoto();
+		if(!mf.isEmpty()) {
+			member.setMphotooname(mf.getOriginalFilename());
+			String saveName = new Date().getTime() + "-" +mf.getOriginalFilename();
+			member.setMphotosname(saveName);
+			member.setMphototype(mf.getContentType());
+			//파일 저장
+			File saveFile = new File("D:/MyWorkPlace/uploadfiles/members/" + saveName);
+			mf.transferTo(saveFile);
+		}
+		//DB에 저장
+		
 		memberService.join(member);
 		return "redirect:/ch14/boardlist2";
+	}
+	
+	@GetMapping(value = "/mphoto")
+	public void mphoto(String mid, HttpSession sesson, HttpServletResponse response) throws Exception {
+		if(mid == null) {
+			mid =(String) sesson.getAttribute("sessionMid");
+		}
+		
+		
+		Ch14Member member = memberService.getMember(mid);
+		String filePath = null;
+		
+		if(member.getMphotosname() != null) {
+			String mphotosname = member.getMphotosname();
+			filePath = "D:/MyWorkPlace/uploadfiles/members/" + mphotosname;
+			
+			response.setContentType(member.getMphototype());
+			
+			String mphotooname = member.getMphotooname();
+			mphotooname = new String(mphotooname.getBytes("UTF-8"), "ISO-8859-1");
+			response.setHeader("Content-Disposition", "attachment; filename=\""+ mphotooname +"\"");
+		} else {
+			filePath = "D:/MyWorkPlace/uploadfiles/members/defaultphoto.jpg";
+
+			response.setContentType("image/jpeg");
+		}
+		OutputStream os = response.getOutputStream();
+		InputStream is = new FileInputStream(filePath);
+		FileCopyUtils.copy(is,os);
+		os.flush();
+		os.close();
+		is.close();
+		
 	}
 	
 	@GetMapping(value = "/login")
@@ -238,6 +293,33 @@ public class Ch14Controller {
 	@GetMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
+		return "redirect:/ch14/boardlist2";
+	}
+	
+	@GetMapping(value = "/boardread")
+	public String boardread(int bno, Model model) {
+		Ch14board board = boardservice.getBoard(bno);
+		model.addAttribute("board", board);
+		return "ch14/boardread";
+	}
+	
+	@GetMapping(value = "/boardupdate")
+	public String boardupdateForm(int bno, Model model) {
+		Ch14board board = boardservice.getBoard(bno);
+		model.addAttribute("board", board);
+		return "ch14/boardupdate";
+	}
+	
+	@PostMapping(value = "/boardupdate")
+	public String boardupdate(Ch14board board) {
+		int num = boardservice.updateBoard(board);
+		System.out.println(num);
+		return "redirect:/ch14/boardlist2";
+	}
+	
+	@GetMapping(value = "/boarddelete")
+	public String boarddeleteForm(int bno) {
+		boardservice.deleteBoard(bno);
 		return "redirect:/ch14/boardlist2";
 	}
 	

@@ -23,11 +23,27 @@
 			    where ROWNUM &lt;= #{endRowNo}) 
 		where eno &gt;= #{startRowNo}
 	</select>
+	
+	<select id="selectByPK" parameterType="int" resultType="board">
+		select bno, btitle, bcontent, bwriter, bhitcount, bdate 
+		from boards
+		where bno = #{bno}
+	</select>
 	<!-- #{} getbtitle를 가지고 오겠다는 의미 -->
 	<insert id="insert" parameterType="board">
 		insert into boards (bno, btitle, bcontent, bwriter, bdate, bhitcount)
 		values (bno_seq.nextval, #{btitle}, #{bcontent}, #{bwriter}, sysdate, 0)
 	</insert>
+	
+	<update id="update" parameterType="board">
+		update boards 
+		set btitle=#{btitle}, bcontent=#{bcontent}
+		where bno=#{bno} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete boards where bno =#{bno}
+	</delete>
 	
 	
 </mapper>

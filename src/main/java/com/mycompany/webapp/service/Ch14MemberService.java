@@ -32,5 +32,10 @@ public class Ch14MemberService {
 			return "wrongMpassword";
 		}
 	}
+
+	public Ch14Member getMember(String mid) {
+		Ch14Member member = memberDao.selectByPK(mid);
+		return member;
+	}
 	
 }

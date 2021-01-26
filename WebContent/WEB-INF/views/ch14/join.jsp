@@ -35,7 +35,7 @@
 						<div class="alert alert-primary" role="alert">
 							회원가입
 						</div>
-						<form name="joinform" action="join" method="post" style="width:200px;">
+						<form enctype="multipart/form-data" name="joinform" action="join" method="post" style="width:200px;">
 							<div class="form-group">
 							    <label for="mid">아이디</label>
 							    <input type="text" class="form-control" id="mid" name="mid">
@@ -44,9 +44,15 @@
 						    <label for="mname">이름</label>
 						    <input type="text" class="form-control" id="mname" name="mname">
 						  </div>
+						 
 						  <div class="form-group">
 						    <label for="mpassword">비밀번호</label><br/>
 						    <input type="password" class="form-control" id="mpassword" name="mpassword">
+						  </div>
+						   <div class="form-group">
+						    <label for="mphoto">프로필 사진</label><br/>
+						    <input type="file" id="mphoto" name="mphoto">
+						    <small class="form-text text-danger">옵션 입력 사항입니다.</small>
 						  </div>
 						  <button class="btn btn-primary">가입</button>
 						  <a href="boardlist2" class="btn btn-primary">뒤로가기</a>

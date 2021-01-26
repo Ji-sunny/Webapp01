@@ -37,4 +37,20 @@ private static final Logger logger = LoggerFactory.getLogger(Ch14BoardService.cl
 		int totalRows = boardDao.countAll();
 		return totalRows;
 	}
+
+	public Ch14board getBoard(int bno) {
+		Ch14board board = boardDao.selectByPK(bno);
+		return board;
+	}
+
+	public int updateBoard(Ch14board board) {
+		int rows = boardDao.update(board);
+		return rows;
+		
+	}
+
+	public void deleteBoard(int bno) {
+		boardDao.delete(bno);
+		
+	}
 }

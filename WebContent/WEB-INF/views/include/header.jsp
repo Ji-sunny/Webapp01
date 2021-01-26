@@ -10,7 +10,7 @@
 		</c:if>
 		
 		<c:if test="${sessionMid != null}">
-			<img class="rounded-circle" src="<%=application.getContextPath()%>/resources/img/myphoto.jpg" width="50px"/>
+			<img class="rounded-circle" src="<%=application.getContextPath()%>/ch14/mphoto" width="50px"/>
 			<a class="btn btn-danger btn-sm" href="<%=application.getContextPath()%>/ch14/logout">로그아웃</a>
 		</c:if>
 	</div>

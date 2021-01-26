@@ -48,8 +48,8 @@
 							  	<c:forEach var="board" items="${list}">
 							  		<tr>
 							  			<td>${board.bno}</td>
-							  			<td>${board.btitle}</td>
-							  			<td>${board.bwriter}</td>
+							  			<td><a class="text-warning text-decoration-none" href="boardread?bno=${board.bno}">${board.btitle}</a></td>
+							  			<td><img class="rounded-circle" src="mphoto?mid=${board.bwriter}" width="30px"/></td>
 							  			<td>${board.bhitcount}</td>
 							  			<td><fmt:formatDate value="${board.bdate}" pattern="yyyy.MM.dd"/> </td>
 							  		</tr>
