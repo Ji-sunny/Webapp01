@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.nio.channels.SeekableByteChannel;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,11 +33,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.Ch14Employee;
 import com.mycompany.webapp.dto.Ch14Member;
+import com.mycompany.webapp.dto.Ch14Order;
+import com.mycompany.webapp.dto.Ch14OrderItems;
 import com.mycompany.webapp.dto.Ch14Pager;
 import com.mycompany.webapp.dto.Ch14board;
 import com.mycompany.webapp.service.Ch14BoardService;
 import com.mycompany.webapp.service.Ch14EmployeeService;
 import com.mycompany.webapp.service.Ch14MemberService;
+import com.mycompany.webapp.service.Ch14OrderService;
 
 @Controller
 @RequestMapping("/ch14")
@@ -159,6 +163,7 @@ public class Ch14Controller {
 		pw.flush();
 		pw.close();
 	}
+	
 	
 	@Resource
 	private Ch14BoardService boardservice;
@@ -361,6 +366,34 @@ public class Ch14Controller {
 		os.close();
 		is.close();
 		
+	}
+	
+	@Resource
+	private Ch14OrderService orderSerive;
+	
+	@GetMapping(value = "/order")
+	public String order() {
+		//주문 정보 얻기 > brower에서 받기
+		Ch14Order order = new Ch14Order();
+		order.setMid("spring");
+		order.setAddress("우리집으로 가쟈");
+		//주문 상품 정보 얻기 >> 장바구니에서
+		
+		List<Ch14OrderItems> orderitems = new ArrayList<>();
+		Ch14OrderItems oi1 = new Ch14OrderItems();
+		oi1.setPid("다이아");
+		oi1.setAmount(10);
+		orderitems.add(oi1);
+		
+		Ch14OrderItems oi2 = new Ch14OrderItems();
+		oi2.setPid("롯데타워");
+		oi2.setAmount(1);
+		orderitems.add(oi2);
+		
+		//주문처리
+		orderSerive.order(order, orderitems);
+		
+		return "ch14/content";
 	}
 	
 }

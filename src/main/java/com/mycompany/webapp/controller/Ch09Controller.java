@@ -77,7 +77,7 @@ public class Ch09Controller {
 	
 	@GetMapping("/photolist")
 	public String photolist (Model model) {
-		String saveDirPath = "D:/MyWorkPlace/uploadfiles/";
+		String saveDirPath = "D:/MyWorkPlace/uploadfiles/"; //파일이 있는 경로
 		File dir = new File(saveDirPath);
 		String[] fileNames = dir.list();
 		model.addAttribute("fileNames", fileNames);
